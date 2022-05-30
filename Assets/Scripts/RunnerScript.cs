@@ -14,6 +14,7 @@ public class RunnerScript : MonoBehaviour
     [SerializeField] private PathCreator pathCreator;
     [SerializeField] private SimpleAnimancer animancer;
     [SerializeField] private PlayerSwerve playerSwerve;
+    [SerializeField] private PathManager pathManager;
 
     [Header("Path Settings")]
     [SerializeField] private float distance = 0;
@@ -26,13 +27,6 @@ public class RunnerScript : MonoBehaviour
     [SerializeField] private float localTargetswipeSpeed = 2f;
     [SerializeField] private float swipeLerpSpeed = 2f;
     [SerializeField] private float swipeRotateLerpSpeed = 2f;
-
-    [Header("Painting Settings")]
-    [SerializeField] private float localModelSwipeSpeed = 0.05f;
-    [SerializeField] private float clampModelLocalX = 0.45f;
-    [SerializeField] private float clampModelLocalZ = 0.45f;
-    private GameObject finishPoint;
-    public bool canClean = false;
 
     private Vector3 oldPosition;
     private bool canRun = false;
@@ -56,7 +50,6 @@ public class RunnerScript : MonoBehaviour
     private void Start()
     {
         PlayAnimation("StartIdle");
-        finishPoint = GameObject.FindGameObjectWithTag("FinishPoint");
     }
 
     // Update is called once per frame
@@ -94,7 +87,7 @@ public class RunnerScript : MonoBehaviour
 
     private void PlayerSwipe_OnSwerve(Vector2 direction)
     {
-        if (canClean)
+        /*if (canClean)
         {
             canFollow = false;
             model.localPosition = model.localPosition + Vector3.right * direction.x * localModelSwipeSpeed * Time.deltaTime;
@@ -104,7 +97,7 @@ public class RunnerScript : MonoBehaviour
             pos.x = Mathf.Clamp(pos.x, -clampModelLocalX, clampModelLocalX);
             pos.z = Mathf.Clamp(pos.z, (transform.position.z + -clampModelLocalZ), (transform.position.z + clampModelLocalZ));
             model.position = pos;
-        }
+        }*/
 
         if (canSwerve)
         {
@@ -169,6 +162,12 @@ public class RunnerScript : MonoBehaviour
     public void CanSwerve()
     {
         canSwerve = false;
+    }
+
+    public void SwitchPathLine()
+    {
+        pathCreator = pathManager.ReturnCurrenntRoad();
+        distance = 0;
     }
 
     public void StopMovement()

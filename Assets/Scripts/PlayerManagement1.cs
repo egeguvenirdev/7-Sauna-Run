@@ -233,7 +233,7 @@ public class PlayerManagement1 : MonoSingleton<PlayerManagement1>
             paint.SetActive(true);
             camFollower.StopMovement();
             oneTimeCheck = true;
-            runnerScript.canClean = check;
+            //runnerScript.canClean = check;
         }      
     }
 }
