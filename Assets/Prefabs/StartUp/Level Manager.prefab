@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5064318747106789651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5064318747106789649}
+  - component: {fileID: 5064318747106789648}
+  m_Layer: 0
+  m_Name: Level Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5064318747106789649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064318747106789651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12020683, y: -2.946653, z: 63.681587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5064318747106789648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064318747106789651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74bac78ce7f8b8241a58ee55067c2417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelPrefabs:
+  - {fileID: 6649539561759424597, guid: fbf395e2c23dcff47b6a93701471811a, type: 3}
+  - {fileID: 1655178809533117137, guid: 4e72a3fbe2a08854ea557fd122a8f744, type: 3}
+  - {fileID: 5578891504968240054, guid: d47a77c754ae10b438d2d31d82b2a01e, type: 3}
+  - {fileID: 8551863179818651277, guid: 360a5aa59a2bfb44991baf5768a22a8c, type: 3}
+  - {fileID: 8052920431390709544, guid: c104aa735115d5149a6554b60993b7fc, type: 3}
+  - {fileID: 4310856141077935521, guid: 43eb4056c6d88554bb9a33e0fd66308b, type: 3}
+  - {fileID: 2093156782581919411, guid: 7ee62c1bad3ceb045b1efcd0d127a356, type: 3}
+  - {fileID: 7511130078970969997, guid: 6a24276ded62d26419f45c310110412f, type: 3}
+  - {fileID: 5648716172956507749, guid: 3e8054f2f40794b41a01eb5f93f12729, type: 3}
+  - {fileID: 5123209560853330812, guid: 1923a563b7c10564d948944522b79cde, type: 3}
+  _levelIndex: 0
+  _forceLevel: 0
