@@ -55,6 +55,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void TapToPlayButton()
     {
         tapToPlayUI.SetActive(false);
+        PlayerManagement.Instance.StartMovement();
         isPaused = false;
     }
 

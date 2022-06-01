@@ -14,25 +14,25 @@ public class RunnerScript : MonoBehaviour
     [SerializeField] private PathCreator pathCreator;
     [SerializeField] private SimpleAnimancer animancer;
     [SerializeField] private PlayerSwerve playerSwerve;
-    [SerializeField] private PathManager pathManager;
+    private PathManager pathManager;
 
     [Header("Path Settings")]
     [SerializeField] private float distance = 0;
     [SerializeField] private float startDistance = 0;
     [SerializeField] private float clampLocalX = 2f;
-    
+
 
     [Header("Run Settings")]
     [SerializeField] private float runSpeed = 2;
     [SerializeField] private float localTargetswipeSpeed = 2f;
     [SerializeField] private float swipeLerpSpeed = 2f;
     [SerializeField] private float swipeRotateLerpSpeed = 2f;
+    private Vector3 playerHeightVector = new Vector3(0, 0, 0);
 
     private Vector3 oldPosition;
     private bool canRun = false;
     private bool canSwerve = false;
     private bool canFollow = true;
-    private bool moveEnabled = false;
     private string currentAnimName = "Walking";
 
     void Awake()
@@ -44,11 +44,12 @@ public class RunnerScript : MonoBehaviour
 
     public void Init()
     {
-        pathCreator = FindObjectOfType<PathCreator>();
+        pathCreator = pathManager.ReturnCurrenntRoad(0);
     }
 
     private void Start()
     {
+        pathManager = GameObject.FindGameObjectWithTag("PathManager").GetComponent<PathManager>();
         PlayAnimation("StartIdle");
     }
 
@@ -80,7 +81,7 @@ public class RunnerScript : MonoBehaviour
         if (canRun)
         {
             distance += runSpeed * Time.deltaTime;
-            transform.position = pathCreator.path.GetPointAtDistance(distance);
+            transform.position = pathCreator.path.GetPointAtDistance(distance) + playerHeightVector;
             transform.eulerAngles = pathCreator.path.GetRotationAtDistance(distance).eulerAngles + new Vector3(0f, 0f, 90f);
         }
     }
@@ -164,10 +165,22 @@ public class RunnerScript : MonoBehaviour
         canSwerve = false;
     }
 
-    public void SwitchPathLine()
+    public void SwitchPathLine(int number)
     {
-        pathCreator = pathManager.ReturnCurrenntRoad();
-        distance = 0;
+        if (number == 0)
+        {
+            return;
+        }
+        if(number >= 1)
+        {
+            pathCreator = pathManager.ReturnCurrenntRoad(number);
+            distance = 0;
+        }
+    }
+
+    public void SetPlayerHeight(float height)
+    {
+        playerHeightVector = new Vector3(0, height, 0);
     }
 
     public void StopMovement()
@@ -181,7 +194,7 @@ public class RunnerScript : MonoBehaviour
     {
         PlayAnimation("StartIdle");
         distance = 0;
-        localMoverTarget.localPosition = new Vector3 (0, 0, 1f);
+        localMoverTarget.localPosition = new Vector3(0, 0, 1f);
         canRun = false;
         canSwerve = false;
     }

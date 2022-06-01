@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class CamFollower : MonoBehaviour
 {
-    [SerializeField] private Transform player;
     [SerializeField] private Transform targetTransform = null;
+    [SerializeField] private Transform localTransform = null;
     [SerializeField] private Transform cam;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float playerFollowSpeed = 0.125f;
@@ -23,13 +23,10 @@ public class CamFollower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(targetTransform == player)
-        {
-            Vector3 targetPosition = player.position + offset;
-            targetPosition.x = Mathf.Clamp(targetPosition.x, -clampLocalX, clampLocalX);
+        Vector3 targetPosition = localTransform.localPosition;
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -clampLocalX, clampLocalX);
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, playerFollowSpeed);
-        }
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, playerFollowSpeed);
     }
 
     public void SwitchTarget(Transform newTargetTransform)
