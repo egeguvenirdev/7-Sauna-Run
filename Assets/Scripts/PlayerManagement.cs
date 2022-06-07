@@ -22,8 +22,11 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     [SerializeField] private int bigCap;
     [SerializeField] private int currentCustomerCount = 1;
 
-    [Header("Saunas transforms")]
-    [SerializeField] private GameObject[] customers;
+    [Header("Saunas Customers")]
+    [SerializeField] private List<GameObject> customers = new List<GameObject>();
+    [SerializeField] private GameObject mainCharacter;
+    [SerializeField] private GameObject thrashCharacter;
+    private GameObject pickedObject;
 
     private int activeMaxCap;
 
@@ -35,6 +38,8 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         DOTween.Init();
         runnerScript.Init();
         activeMaxCap = smallCap;
+
+        customers.Add(mainCharacter);
     }
 
     void Update()
@@ -47,46 +52,46 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         {
             return;
         }
-        currentCustomerCount ++;
 
         if (smallPool.activeSelf)
         {
-            smallTransforms[currentCustomerCount] = addedCharacter;
+            addedCharacter.transform.SetParent(smallPool.transform);
+            addedCharacter.transform.position = smallTransforms[currentCustomerCount].transform.position;
         }
 
         if (mediumPool.activeSelf)
         {
-            mediumTransforms[currentCustomerCount] = addedCharacter;
+            addedCharacter.transform.SetParent(mediumPool.transform);
+            addedCharacter.transform.position = mediumTransforms[currentCustomerCount].transform.position;
         }
 
         if (bigPool.activeSelf)
         {
-            bigTransforms[currentCustomerCount] = addedCharacter;
+            addedCharacter.transform.SetParent(bigPool.transform);
+            addedCharacter.transform.position = bigTransforms[currentCustomerCount].transform.position;
         }
+
+        currentCustomerCount++;
+        customers.Add(addedCharacter);
+        Debug.Log(currentCustomerCount);
     }
 
-    public void ThrowCustomer(GameObject addedCharacter)
+    public void ThrowCustomer()
     {
-        if (currentCustomerCount == 1) 
+        seq = DOTween.Sequence();
+        if (currentCustomerCount == 1)
         {
             //kill the game
         }
 
-        if (smallPool.activeSelf)
-        {
-            smallTransforms[currentCustomerCount] = addedCharacter;
-        }
+        pickedObject = customers[currentCustomerCount - 1];
+        Vector3 jumpPoint = new Vector3(pickedObject.transform.position.x, pickedObject.transform.position.y + 1, pickedObject.transform.position.z);
+        seq.Append(pickedObject.transform.DOJump(jumpPoint, 1, 1, 1)
+            .OnComplete(() => { pickedObject.transform.parent = null; }));
 
-        if (mediumPool.activeSelf)
-        {
-            mediumTransforms[currentCustomerCount] = addedCharacter;
-        }
-
-        if (bigPool.activeSelf)
-        {
-            bigTransforms[currentCustomerCount] = addedCharacter;
-        }
         currentCustomerCount--;
+        customers.RemoveAt(currentCustomerCount);
+        Debug.Log(currentCustomerCount);
     }
 
     public void AddCap(int addedCap)
