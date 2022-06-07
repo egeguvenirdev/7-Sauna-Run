@@ -81,7 +81,8 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         seq = DOTween.Sequence();
         if (currentCustomerCount == 1)
         {
-            //kill the game
+            StopMovement();
+            UIManager.Instance.RestartButtonUI();
         }
 
         pickedObject = customers[currentCustomerCount - 1];

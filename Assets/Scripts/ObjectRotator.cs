@@ -9,6 +9,8 @@ public class ObjectRotator : MonoBehaviour
     [SerializeField] private float speed = 4f;
     [SerializeField] private float minHeight;
     [SerializeField] private float maxHeight;
+
+    [SerializeField] private bool upAndDown = true;
     private Vector3 minVec;
     private Vector3 maxVec;
 
@@ -22,8 +24,11 @@ public class ObjectRotator : MonoBehaviour
     {
         transform.Rotate(_rotateVelocity * Time.deltaTime, _rotateSpace);
 
-        float lerpValue = (Mathf.Sin(speed * Time.time) + 1f) / 2f; // <0, 1> 
-        transform.position = Vector3.Lerp(minVec, maxVec, lerpValue);
+        if (upAndDown)
+        {
+            float lerpValue = (Mathf.Sin(speed * Time.time) + 1f) / 2f; // <0, 1> 
+            transform.position = Vector3.Lerp(minVec, maxVec, lerpValue);
+        }    
     }
 }
 
