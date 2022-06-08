@@ -7,17 +7,18 @@ public class ModelManager : MonoBehaviour
     [SerializeField] private GameObject dirty;
     [SerializeField] private GameObject clean;
     [SerializeField] private Bermuda.Animation.SimpleAnimancer animancer;
+    [SerializeField] private int minSittingRange = 6;
+    [SerializeField] private int maxSittingRange = 10;
+    [SerializeField] private int minCheeringRange = 0;
+    [SerializeField] private int maxCheeringRange = 5;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.CompareTag("Player"))
+        {
+            PlayerManagement.Instance.AddCustomer(gameObject);
+            PlaySittingAnim();
+        }
     }
 
     private void OpenCleanMesh()
@@ -26,8 +27,14 @@ public class ModelManager : MonoBehaviour
         clean.SetActive(true);
     }
 
-    private void PlayAnim(string animName)
+    private void PlaySittingAnim()
     {
-        animancer.PlayAnimation(animName);
+        animancer.PlayAnimation(minSittingRange, maxSittingRange);
+        Invoke("OpenCleanMesh", 2f);
+    }
+
+    private void PlayCheeringAnim()
+    {
+        animancer.PlayAnimation(minCheeringRange, maxCheeringRange);
     }
 }

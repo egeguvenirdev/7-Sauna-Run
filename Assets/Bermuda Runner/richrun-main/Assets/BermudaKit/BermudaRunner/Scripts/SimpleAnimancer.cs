@@ -10,6 +10,7 @@ namespace Bermuda.Animation
         [Space]
         [SerializeField] private AnimationClip[] _clips;
         [SerializeField] private bool _playDefault = false;
+        [SerializeField] private int idleRange = 5;
 
         private AnimancerState _currentState;
 
@@ -17,7 +18,8 @@ namespace Bermuda.Animation
         {
             if (_playDefault)
             {
-                PlayAnimation(_clips[0].name);
+                Debug.Log("start anim");
+                PlayAnimation(_clips[Random.Range(10, 12)].name);
             }
         }
         public void PlayAnimation(string clipName)
@@ -35,6 +37,11 @@ namespace Bermuda.Animation
             {
                 _currentState = _animancer.Play(clip, _fadeDuration);
             }
+        }
+
+        public void PlayAnimation(int minRange, int maxRange)
+        {
+            PlayAnimation(_clips[Random.Range(minRange, maxRange)].name);
         }
 
         public void PlayMixer(LinearMixerTransition transition, float speed)

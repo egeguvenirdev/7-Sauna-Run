@@ -163,7 +163,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 606930622095994237}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 2735279987809968919}
   - component: {fileID: 8696293293166728277}
   - component: {fileID: 5906687709908838750}
+  - component: {fileID: 6408997655286293834}
   m_Layer: 0
   m_Name: 'man_2 '
   m_TagString: Untagged
@@ -514,7 +515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233040844466816848}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.06, z: -0.329}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 7415073308286487924}
@@ -532,7 +533,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233040844466816848}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 84d06b5cce59a7647b49412515b3d8e1, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 2cdcc07b63e7fe141829cbeb664624b3, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -570,8 +571,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animancer: {fileID: 2735279987809968919}
   _fadeDuration: 0.1
-  _clips: []
+  _clips:
+  - {fileID: 7400000, guid: 6d76b8814182238438905c37dbca92d2, type: 2}
+  - {fileID: 7400000, guid: 34833eae5266e7344a7a11293c397352, type: 2}
+  - {fileID: 7400000, guid: 835af9e65d56b60428703ed6249076b5, type: 2}
+  - {fileID: 7400000, guid: dc465ffd1fa60374f9d74dd49f99694c, type: 2}
+  - {fileID: 7400000, guid: b75e86080be32d14d9418abb5a1057c6, type: 2}
+  - {fileID: 7400000, guid: bc48ea87377e5c740ad4614e3fa2fdab, type: 2}
+  - {fileID: 7400000, guid: b27169afa2704dd4db9622a5d13a651b, type: 2}
+  - {fileID: 7400000, guid: 57f8b8635e2ef9a44898a61a9ff6a908, type: 2}
+  - {fileID: 7400000, guid: 5714919b0ba6c3348b37ff025a14d76a, type: 2}
+  - {fileID: 7400000, guid: aa84aab5bc858c44a9a3547429eafcb3, type: 2}
+  - {fileID: 7400000, guid: 4c9852ea9dbb87147b25834d63490f58, type: 2}
+  - {fileID: 7400000, guid: 044d7236b60e4b54f9bc969a8d1e25a7, type: 2}
   _playDefault: 1
+  idleRange: 5
 --- !u!114 &5906687709908838750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +601,23 @@ MonoBehaviour:
   dirty: {fileID: 606930622095994237}
   clean: {fileID: 3533651619124366941}
   animancer: {fileID: 8696293293166728277}
+  minSittingRange: 5
+  maxSittingRange: 9
+  minCheeringRange: 0
+  maxCheeringRange: 5
+--- !u!65 &6408997655286293834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233040844466816848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 80, z: 15}
+  m_Center: {x: 0, y: 44.1, z: 0}
 --- !u!1 &1290811833545985568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1220,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 3533651619124366941}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
