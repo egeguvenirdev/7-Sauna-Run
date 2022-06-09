@@ -18,8 +18,7 @@ namespace Bermuda.Animation
         {
             if (_playDefault)
             {
-                Debug.Log("start anim");
-                PlayAnimation(_clips[Random.Range(10, 12)].name);
+                PlayAnimation(_clips[Random.Range(9, 12)].name);
             }
         }
         public void PlayAnimation(string clipName)

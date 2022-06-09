@@ -17,7 +17,10 @@ public class ModelManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerManagement.Instance.AddCustomer(gameObject);
-            PlaySittingAnim();
+            if (PlayerManagement.Instance.CanSit())
+            {
+                PlaySittingAnim();
+            }
         }
     }
 

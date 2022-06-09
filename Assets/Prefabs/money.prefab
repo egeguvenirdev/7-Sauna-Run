@@ -52,7 +52,7 @@ MeshRenderer:
   m_GameObject: {fileID: 608762888379931232}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b5fa30ed00e8d429ace749ed142c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  col: {fileID: 6625783327874592704}
   moneyWorth: 1
 --- !u!114 &9149550726747565946
 MonoBehaviour:

@@ -29,6 +29,7 @@ public class UIManager : MonoSingleton<UIManager>
     [Space]
     //status texts
     [SerializeField] private Image progressBarImage;
+    [SerializeField] private TMP_Text progressBarText;
 
     public bool isPaused;
 
@@ -137,9 +138,11 @@ public class UIManager : MonoSingleton<UIManager>
         currentLV.text = "Level " + levelInt;
     }
 
-    public void SetProgress(float progress)
+    public void SetProgress(float max, float min)
     {
+        float progress = max / min;
         progressBarImage.fillAmount = progress;
+        progressBarText.text = min + " / " + max;
     }
 
     public void SetTotalMoney(string money)

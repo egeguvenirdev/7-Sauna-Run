@@ -526,13 +526,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: man 1(Clone)
+    - name: man_2(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: BaseMesh_Man_Simple_Body_BASEMESH_WHITE_0
+      parentName: man_2(Clone)
+      position: {x: -0.02593257, y: 0.14946122, z: 0.0000028337404}
+      rotation: {x: 0.7071068, y: -0.0000000025548392, z: 1.699379e-11, w: 0.7071067}
+      scale: {x: 0.004541069, y: 0.004541071, z: 0.004541071}
     - name: Armature
-      parentName: man 1(Clone)
+      parentName: man_2(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -926,11 +931,6 @@ ModelImporter:
       position: {x: -0, y: 2.7413886, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: BaseMesh_Man_Simple_Body_BASEMESH_WHITE_0.001
-      parentName: man 1(Clone)
-      position: {x: -0.02593257, y: 0.14946122, z: 0.0000028337404}
-      rotation: {x: 0.7071068, y: -0.0000000025548392, z: 1.699379e-11, w: 0.7071067}
-      scale: {x: 0.004541069, y: 0.004541071, z: 0.004541071}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -943,7 +943,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2cdcc07b63e7fe141829cbeb664624b3, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 84d06b5cce59a7647b49412515b3d8e1, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

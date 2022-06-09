@@ -17,6 +17,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     [Space]
     [SerializeField] private GameObject bigPool;
     [SerializeField] private GameObject[] bigTransforms;
+    [SerializeField] private int startCap = 5;
     [SerializeField] private int smallCap;
     [SerializeField] private int mediumCap;
     [SerializeField] private int bigCap;
@@ -37,9 +38,9 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     {
         DOTween.Init();
         runnerScript.Init();
-        activeMaxCap = smallCap;
-
+        activeMaxCap = startCap;
         customers.Add(mainCharacter);
+        UIManager.Instance.SetProgress(activeMaxCap, currentCustomerCount);
     }
 
     void Update()
@@ -70,10 +71,10 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
             addedCharacter.transform.SetParent(bigPool.transform);
             addedCharacter.transform.position = bigTransforms[currentCustomerCount].transform.position;
         }
-
+   
         currentCustomerCount++;
         customers.Add(addedCharacter);
-        Debug.Log(currentCustomerCount);
+        UIManager.Instance.SetProgress((float)activeMaxCap, (float)currentCustomerCount);
     }
 
     public void ThrowCustomer()
@@ -190,6 +191,18 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
                 activeMaxCap = bigCap;
                 return;
             }
+        }
+    }
+
+    public bool CanSit()
+    {
+        if(currentCustomerCount == activeMaxCap + 1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
