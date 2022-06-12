@@ -42,7 +42,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.63, y: 0.66, z: 0.86}
+  m_Size: {x: 6.81, y: 2, z: 1.5}
   m_Center: {x: 0.019805312, y: -0.01, z: -0.0057184696}
 --- !u!1 &5816498079394132444
 GameObject:
@@ -147,6 +147,7 @@ MonoBehaviour:
   speed: 2
   minHeight: 0.6
   maxHeight: 1
+  upAndDown: 1
 --- !u!114 &4182857410009691751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,5 +173,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.86, z: 7.25}
+  m_Size: {x: 1.5, y: 2, z: 8}
   m_Center: {x: 0.019805312, y: -0.01, z: -0.0057184696}

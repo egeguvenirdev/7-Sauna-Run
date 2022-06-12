@@ -11,16 +11,23 @@ public class ModelManager : MonoBehaviour
     [SerializeField] private int maxSittingRange = 10;
     [SerializeField] private int minCheeringRange = 0;
     [SerializeField] private int maxCheeringRange = 5;
+    private Collider col;
+
+    private void Start()
+    {
+        col = GetComponent<Collider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerManagement.Instance.AddCustomer(gameObject);
             if (PlayerManagement.Instance.CanSit())
             {
                 PlaySittingAnim();
             }
+            PlayerManagement.Instance.AddCustomer(gameObject);
+            CloseCollider();
         }
     }
 
@@ -39,5 +46,10 @@ public class ModelManager : MonoBehaviour
     private void PlayCheeringAnim()
     {
         animancer.PlayAnimation(minCheeringRange, maxCheeringRange);
+    }
+
+    private void CloseCollider()
+    {
+        col.enabled = false;
     }
 }

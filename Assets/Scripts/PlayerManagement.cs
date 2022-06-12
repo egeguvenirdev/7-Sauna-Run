@@ -17,16 +17,16 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     [Space]
     [SerializeField] private GameObject bigPool;
     [SerializeField] private GameObject[] bigTransforms;
+    [SerializeField] private GameObject holder;
+    [Space]
     [SerializeField] private int startCap = 5;
     [SerializeField] private int smallCap;
     [SerializeField] private int mediumCap;
     [SerializeField] private int bigCap;
-    [SerializeField] private int currentCustomerCount = 1;
 
     [Header("Saunas Customers")]
     [SerializeField] private List<GameObject> customers = new List<GameObject>();
     [SerializeField] private GameObject mainCharacter;
-    [SerializeField] private GameObject thrashCharacter;
     private GameObject pickedObject;
 
     private int activeMaxCap;
@@ -40,7 +40,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         runnerScript.Init();
         activeMaxCap = startCap;
         customers.Add(mainCharacter);
-        UIManager.Instance.SetProgress(activeMaxCap, currentCustomerCount);
+        UIManager.Instance.SetProgress(activeMaxCap, customers.Count);
     }
 
     void Update()
@@ -49,184 +49,148 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
 
     public void AddCustomer(GameObject addedCharacter)
     {
-        if (currentCustomerCount == activeMaxCap)
+        if (customers.Count == activeMaxCap)
         {
             return;
         }
 
         if (smallPool.activeSelf)
         {
-            addedCharacter.transform.SetParent(smallPool.transform);
-            addedCharacter.transform.position = smallTransforms[currentCustomerCount].transform.position;
+            addedCharacter.transform.SetParent(holder.transform);
+            addedCharacter.transform.position = smallTransforms[customers.Count].transform.position;
         }
 
         if (mediumPool.activeSelf)
         {
-            addedCharacter.transform.SetParent(mediumPool.transform);
-            addedCharacter.transform.position = mediumTransforms[currentCustomerCount].transform.position;
+            addedCharacter.transform.SetParent(holder.transform);
+            addedCharacter.transform.position = mediumTransforms[customers.Count].transform.position;
         }
 
         if (bigPool.activeSelf)
         {
-            addedCharacter.transform.SetParent(bigPool.transform);
-            addedCharacter.transform.position = bigTransforms[currentCustomerCount].transform.position;
+            addedCharacter.transform.SetParent(holder.transform);
+            addedCharacter.transform.position = bigTransforms[customers.Count].transform.position;
         }
-   
-        currentCustomerCount++;
+
         customers.Add(addedCharacter);
-        UIManager.Instance.SetProgress((float)activeMaxCap, (float)currentCustomerCount);
-    }
-
-    public void ThrowCustomer()
-    {
-        seq = DOTween.Sequence();
-        if (currentCustomerCount == 1)
-        {
-            StopMovement();
-            UIManager.Instance.RestartButtonUI();
-        }
-
-        pickedObject = customers[currentCustomerCount - 1];
-        Vector3 jumpPoint = new Vector3(pickedObject.transform.position.x, pickedObject.transform.position.y + 1, pickedObject.transform.position.z);
-        seq.Append(pickedObject.transform.DOJump(jumpPoint, 1, 1, 1)
-            .OnComplete(() => { pickedObject.transform.parent = null; }));
-
-        currentCustomerCount--;
-        customers.RemoveAt(currentCustomerCount);
-        Debug.Log(currentCustomerCount);
+        UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
     }
 
     public void AddCap(int addedCap)
     {
-        if ((activeMaxCap + addedCap) <= smallCap) //extra small sauna's calculations
+        if ((activeMaxCap + addedCap) <= smallCap) //small sauna's calculations
         {
-            if (activeMaxCap > smallCap) //medium to small
+            if ((activeMaxCap + addedCap) <= 1)
             {
-                ClearSmallList();
-                for (int i = 1; i < activeMaxCap; i++)
-                {
-                    smallTransforms[i] = mediumTransforms[i];
-                }
-                //BURAYA ICERIDEN ATMA KODU YAZ
-                ClearMediumList();
+                ThrowCustomer();
+                activeMaxCap = 1;
+                UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
+                SetCustomersLocations(smallTransforms);
+                return;
             }
 
             if (!smallPool.activeSelf)
             {
-                activeMaxCap += addedCap;
-                //PLAY PARTICLE FOR SWITCH FORM
-            }
-            smallPool.SetActive(true);
-            mediumPool.SetActive(false);
-            bigPool.SetActive(false);
-
-            if ((activeMaxCap + addedCap) <= 1)
-            {
-                currentCustomerCount = 1; //GERIYE KALANLARI DOK
-                activeMaxCap = 1;
-                return;
+                //play particle
+                smallPool.SetActive(true);
+                mediumPool.SetActive(false);
+                bigPool.SetActive(false);
+                SetCustomersLocations(smallTransforms);
+                Debug.Log("small set cust");
             }
             activeMaxCap += addedCap;
+            UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
             return;
         }
 
-        if ((activeMaxCap + addedCap) > smallCap && (activeMaxCap + addedCap) <= mediumCap) // small sauna's calculations
+        if ((activeMaxCap + addedCap) > smallCap && (activeMaxCap + addedCap) <= mediumCap) // medium sauna's calculations
         {
-            if (activeMaxCap > mediumCap) //big to medium
-            {
-                ClearMediumList();
-                for (int i = 1; i < activeMaxCap; i++)
-                {
-                    mediumTransforms[i] = bigTransforms[i];
-                }
-                //BURAYA ICERIDEN ATMA KODU YAZ
-            }
-            if (activeMaxCap <= smallCap) //small to medium
-            {
-                ClearMediumList();
-                for (int i = 1; i < activeMaxCap; i++)
-                {
-                    mediumTransforms[i] = smallTransforms[i];
-                }
-            }
 
             if (!mediumPool.activeSelf)
             {
-                activeMaxCap += addedCap;
-                //PLAY PARTICLE FOR SWITCH FORM
+                //play particle
+                SetCustomersLocations(mediumTransforms);
+                smallPool.SetActive(false);
+                mediumPool.SetActive(true);
+                bigPool.SetActive(false);
             }
-
-            smallPool.SetActive(false);
-            mediumPool.SetActive(true);
-            bigPool.SetActive(false);
-
             activeMaxCap += addedCap;
+            UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
             return;
         }
 
         if ((activeMaxCap + addedCap) > mediumCap) // big sauna's calculations
         {
-            if (activeMaxCap > smallCap) //medium to small
-            {
-                ClearBigList();
-                for (int i = 1; i < activeMaxCap; i++)
-                {
-                    bigTransforms[i] = mediumTransforms[i];
-                }
-                ClearMediumList();
-            }
-
-            if (bigPool.activeSelf)
-            {
-                activeMaxCap += addedCap;
-                //PLAY PARTICLE FOR SWITCH FORM
-            }
-
-            smallPool.SetActive(false);
-            mediumPool.SetActive(false);
-            bigPool.SetActive(true);
-
-            if ((activeMaxCap + addedCap) > bigCap)
+            if ((activeMaxCap + addedCap) >= bigCap)
             {
                 activeMaxCap = bigCap;
+                UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
+                SetCustomersLocations(bigTransforms);
                 return;
             }
+
+            if (!bigPool.activeSelf)
+            {
+                //play particle
+                smallPool.SetActive(false);
+                mediumPool.SetActive(false);
+                bigPool.SetActive(true);
+                SetCustomersLocations(bigTransforms);
+            }
+            activeMaxCap += addedCap;
+            UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
+            return;
         }
+    }
+
+    private void SetCustomersLocations(GameObject[] activeList)
+    {
+        for (int i = 1; i < customers.Count; i++)
+        {
+            if (i <= activeList.Length)
+            {
+                customers[i].transform.position = activeList[i].transform.position;
+            }
+
+            else
+            {
+                var temp = customers[i];
+                Destroy(temp);
+                customers.RemoveAt(i);
+            }
+        }
+    }
+
+    public void ThrowCustomer()
+    {
+        seq = DOTween.Sequence();
+        if (customers.Count == 1)
+        {
+            StopMovement();
+            UIManager.Instance.RestartButtonUI();
+            return;
+        }
+
+        pickedObject = customers[customers.Count - 1];
+        Vector3 jumpPoint = new Vector3(pickedObject.transform.position.x, pickedObject.transform.position.y + 1, pickedObject.transform.position.z);
+        seq.Append(pickedObject.transform.DOJump(jumpPoint, 1, 1, 1)
+            .OnComplete(() => { pickedObject.transform.parent = null; }));
+
+        Debug.Log(customers.Count);
+        customers.RemoveAt(customers.Count - 1);
+        Debug.Log(customers.Count);
+        UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
     }
 
     public bool CanSit()
     {
-        if(currentCustomerCount == activeMaxCap + 1)
-        {
-            return false;
-        }
-        else
+        if (customers.Count + 1 <= activeMaxCap)
         {
             return true;
         }
-    }
-
-    private void ClearSmallList()
-    {
-        for (int i = 1; i < smallTransforms.Length; i++)
+        else
         {
-            smallTransforms[i] = null;
-        }
-    }
-
-    private void ClearMediumList()
-    {
-        for (int i = 1; i < mediumTransforms.Length; i++)
-        {
-            mediumTransforms[i] = null;
-        }
-    }
-
-    private void ClearBigList()
-    {
-        for (int i = 1; i < bigTransforms.Length; i++)
-        {
-            bigTransforms[i] = null;
+            return false;
         }
     }
 
