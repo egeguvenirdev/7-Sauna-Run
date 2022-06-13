@@ -1,5 +1,6 @@
 ﻿using Ali.Helper;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Ali.Helper
 {
@@ -30,9 +31,18 @@ namespace Ali.Helper
             _levelIndex = _globalLevelIndex;
             if (_levelIndex >= _levelPrefabs.Length)
             {
-                _levelIndex = GameUtility.RandomIntExcept(_levelPrefabs.Length, _levelIndex, 0);
+                _levelIndex = GameUtility.RandomIntExcept(_levelPrefabs.Length + 1, _levelIndex);
+                //_levelIndex = 10;
             }
         }
+
+        private void Awake()
+        {
+            //Init();
+            //GenerateCurrentLevel();
+            //PlayerPrefs.SetInt("HCLevel", 119);
+        }
+
         public void GenerateCurrentLevel()
         {
             if (_currentLevel != null)
@@ -60,7 +70,7 @@ namespace Ali.Helper
             {
                 _levelIndex = GameUtility.RandomIntExcept(_levelPrefabs.Length, _levelIndex);
             }
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         public int GetGlobalLevelIndex()
         {

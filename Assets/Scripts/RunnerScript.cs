@@ -10,6 +10,7 @@ public class RunnerScript : MonoBehaviour
 {
     [Header("Scripts and Transforms")]
     [SerializeField] private Transform model;
+    [SerializeField] private Transform UI;
     [SerializeField] private Transform localMoverTarget;
     [SerializeField] private PathCreator pathCreator;
     [SerializeField] private SimpleAnimancer animancer;
@@ -83,6 +84,8 @@ public class RunnerScript : MonoBehaviour
             distance += runSpeed * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distance) + playerHeightVector;
             transform.eulerAngles = pathCreator.path.GetRotationAtDistance(distance).eulerAngles + new Vector3(0f, 0f, 90f);
+
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
@@ -105,6 +108,7 @@ public class RunnerScript : MonoBehaviour
             localMoverTarget.localPosition = localMoverTarget.localPosition + Vector3.right * direction.x * localTargetswipeSpeed * Time.deltaTime;
             ClampLocalPosition();
         }
+
     }
 
     void ClampLocalPosition()
@@ -119,8 +123,8 @@ public class RunnerScript : MonoBehaviour
     {
         if (canFollow)
         {
-            Vector3 direction = localMoverTarget.localPosition - oldPosition;
-            animancer.GetAnimatorTransform().forward = Vector3.Lerp(animancer.GetAnimatorTransform().forward, direction, swipeRotateLerpSpeed * Time.deltaTime);
+            //Vector3 direction = localMoverTarget.localPosition - oldPosition;
+            //animancer.GetAnimatorTransform().forward = Vector3.Lerp(animancer.GetAnimatorTransform().forward, direction, swipeRotateLerpSpeed * Time.deltaTime);
 
             //swipe the object
             Vector3 nextPos = new Vector3(localMoverTarget.localPosition.x, model.localPosition.y, model.localPosition.z); ;

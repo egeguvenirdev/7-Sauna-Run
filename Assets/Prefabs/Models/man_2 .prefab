@@ -584,7 +584,9 @@ MonoBehaviour:
   - {fileID: 7400000, guid: aa84aab5bc858c44a9a3547429eafcb3, type: 2}
   - {fileID: 7400000, guid: 4c9852ea9dbb87147b25834d63490f58, type: 2}
   - {fileID: 7400000, guid: 044d7236b60e4b54f9bc969a8d1e25a7, type: 2}
+  - {fileID: -203655887218126122, guid: fadc0fc9b8c55a943bd71218ca7273c4, type: 3}
   _playDefault: 1
+  _playSitting: 0
   idleRange: 5
 --- !u!114 &5906687709908838750
 MonoBehaviour:

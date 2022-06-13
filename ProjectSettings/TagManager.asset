@@ -6,6 +6,12 @@ TagManager:
   tags:
   - PathManager
   - Obstacle
+  - Missile
+  - BFE
+  - SFE
+  - MFE
+  - MoneyParticle
+  - Bubble
   layers:
   - Default
   - TransparentFX

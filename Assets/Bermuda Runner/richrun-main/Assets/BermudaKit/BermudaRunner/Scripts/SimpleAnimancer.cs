@@ -10,6 +10,7 @@ namespace Bermuda.Animation
         [Space]
         [SerializeField] private AnimationClip[] _clips;
         [SerializeField] private bool _playDefault = false;
+        [SerializeField] private bool _playSitting = true;
         [SerializeField] private int idleRange = 5;
 
         private AnimancerState _currentState;
@@ -19,6 +20,10 @@ namespace Bermuda.Animation
             if (_playDefault)
             {
                 PlayAnimation(_clips[Random.Range(9, 12)].name);
+            }
+            if (_playSitting)
+            {
+                PlayAnimation(_clips[0].name);
             }
         }
         public void PlayAnimation(string clipName)

@@ -35,17 +35,28 @@ public class ModelManager : MonoBehaviour
     {
         dirty.SetActive(false);
         clean.SetActive(true);
+
+        var particle = ObjectPooler.Instance.GetPooledObject("Bubble");
+        particle.transform.position = transform.position + new Vector3(0, 0f, 1f);
+        particle.transform.rotation = Quaternion.identity;
+        particle.SetActive(true);
+        particle.GetComponent<ParticleSystem>().Play();
     }
 
-    private void PlaySittingAnim()
+    public void PlaySittingAnim()
     {
         animancer.PlayAnimation(minSittingRange, maxSittingRange);
         Invoke("OpenCleanMesh", 2f);
     }
 
-    private void PlayCheeringAnim()
+    public void PlayCheeringAnim()
     {
         animancer.PlayAnimation(minCheeringRange, maxCheeringRange);
+    }
+
+    public void PlayFlyingAnim()
+    {
+        animancer.PlayAnimation("Fly");
     }
 
     private void CloseCollider()

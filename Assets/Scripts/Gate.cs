@@ -40,7 +40,7 @@ public class Gate : MonoBehaviour
 
             if (objectType == ObjectType.DebuffGate)
             {
-                PlayerManagement.Instance.AddCap(capacity);
+                PlayerManagement.Instance.AddCap(-capacity);
                 TurnToGrey();
             }
         }
