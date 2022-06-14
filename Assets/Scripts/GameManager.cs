@@ -7,12 +7,15 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private Material mat;
     private int totalMoney;
+    private int currentLvMoney = 0;
+    private bool oneTimeCheck = true;
 
     [SerializeField] private Color32[] colorTypes = { };
     [SerializeField] private Material[] skyboxes = { };
 
     void Start()
     {
+        currentLvMoney = 0;
         int levelIndex = HCLevelManager.Instance.GetGlobalLevelIndex() + 1;
 
         if(levelIndex % 5 == 0)
@@ -34,12 +37,32 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SetTotalMoney(int collectedAmount)
     {
+        currentLvMoney += collectedAmount;
         totalMoney = PlayerPrefs.GetInt("TotalMoney", 0) + collectedAmount;
         PlayerPrefs.SetInt("TotalMoney", totalMoney);
         string money = FormatFloatToReadableString((float)PlayerPrefs.GetInt("TotalMoney", 0));
         UIManager.Instance.SetTotalMoney(money);
 
         totalMoney = 0;
+    }
+
+    public void AddMultipliedMoney(int collectedAmount)
+    {
+        if (oneTimeCheck)
+        {
+            totalMoney = PlayerPrefs.GetInt("TotalMoney", 0) + collectedAmount;
+            PlayerPrefs.SetInt("TotalMoney", totalMoney);
+            string money = FormatFloatToReadableString((float)PlayerPrefs.GetInt("TotalMoney", 0));
+            UIManager.Instance.SetTotalMoney(money);
+
+            totalMoney = 0;
+            oneTimeCheck = false;
+        }
+    }
+
+    public int ReturnCurrentMoney()
+    {
+        return currentLvMoney;
     }
 
     public static string FormatFloatToReadableString(float value)

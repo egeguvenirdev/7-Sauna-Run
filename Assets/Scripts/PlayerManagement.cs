@@ -26,6 +26,8 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     [SerializeField] private int mediumCap;
     [SerializeField] private int bigCap;
     [SerializeField] private GameObject runParticle;
+    [SerializeField] private float sensivitiy = 2;
+    [SerializeField] private float clampLocalRotZ = 7.5f;
 
     [Header("Saunas Customers")]
     [SerializeField] private List<GameObject> customers = new List<GameObject>();
@@ -33,6 +35,9 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     private GameObject pickedObject;
 
     private int activeMaxCap;
+    public bool canRotate = false;
+    private Vector3 mousePrevPosition = Vector3.zero;
+    private float mouseDeltaPos = 0;
 
     private bool canRun = false;
     Sequence seq;
@@ -44,11 +49,11 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         activeMaxCap = startCap;
         customers.Add(mainCharacter);
         UIManager.Instance.SetProgress(activeMaxCap, customers.Count);
-        seq = DOTween.Sequence();
     }
 
     void Update()
     {
+        RotateZ();
     }
 
     public void AddCustomer(GameObject addedCharacter)
@@ -77,6 +82,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         }
 
         customers.Add(addedCharacter);
+        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
         UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
     }
 
@@ -153,7 +159,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         int test = customers.Count;
         for (int i = 0; i < test; i++)
         {
-            if (i <= activeMaxCap-1)
+            if (i <= activeMaxCap - 1)
             {
                 customers[i].transform.position = activeList[i].transform.position;
             }
@@ -173,7 +179,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         {
             StopMovement();
             UIManager.Instance.RestartButtonUI();
-            jumpPoint += new Vector3 (0, 0, -5);
+            jumpPoint += new Vector3(0, 0, -5);
         }
 
         seq.Append(pickedObject.transform.DOJump(jumpPoint, 1, 1, 1)
@@ -195,9 +201,10 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     private void FadeEffect()
     {
         seq = DOTween.Sequence();
+        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
         Vector3 rotateVector = new Vector3(0, 360, 0);
         seq.Append(character.transform.DORotate(rotateVector, 0.1f, RotateMode.FastBeyond360)
-            .SetEase(Ease.Linear).SetLoops(5, LoopType.Restart));
+            .SetEase(Ease.Linear).SetLoops(7, LoopType.Restart));
     }
 
     public bool CanSit()
@@ -222,35 +229,49 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         runnerScript.StartToRun(false);
     }
 
-    public void SwitchPath(float targetPoint, int number)
+    public void SwitchPath(float targetPoint, int number, bool bumpy)
     {
         //INIS CIKIS ICIN AYRI YAZ TARGET POINT KULLASN
-        seq = DOTween.Sequence();
         if (number == 0)
         {
-            seq.Append(transform.DOMoveY(targetPoint + 2, 1.5f));
-            seq.Append(transform.DOMoveY(targetPoint, 0.375f)
-                .OnComplete(() => { runnerScript.SetPlayerHeight(targetPoint); }));
+            seq = DOTween.Sequence();
+            seq.Append(character.transform.DOMoveY(targetPoint + 2, 1.5f));
+            seq.Append(character.transform.DOMoveY(targetPoint, 0.375f));
         }
         else
         {
             runnerScript.SwitchPathLine(number);
+        }
+        if (bumpy)
+        {
+            canRotate = true;
+            PlayAnim(true);
+            runParticle.SetActive(true);
+            runParticle.GetComponent<ParticleSystem>().Play();
+            runnerScript.runSpeed = 10;
+        }
+        else
+        {
+            canRotate = false;
+            PlayAnim(false);
+            runParticle.SetActive(false);
+            runParticle.GetComponent<ParticleSystem>().Stop();
+            runnerScript.runSpeed = 5;
         }
     }
 
     public void FinishAction()
     {
         StopMovement();
+        PlayAnim(true);
         runParticle.SetActive(true);
         runParticle.GetComponent<ParticleSystem>().Play();
 
         float pathRange = customers.Count * 5;
-        seq.Append(transform.DOJump(new Vector3(0, 0.125f, 120 + (int)pathRange), 10, 1, 5).SetSpeedBased()
+        seq.Append(transform.DOJump(new Vector3(0, 0.125f, transform.position.z + (int)pathRange), pathRange/30 , 1, pathRange / 25)
             .OnComplete(() =>
             {
-                //start dance
-                DragTheSauna();
-                PlayAnim(true);
+                DragTheSauna();         
             }));
         seq.Join(localMover.transform.DOLocalMoveX(0, 1));
     }
@@ -258,9 +279,11 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     {
         Vector3 slidePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(4, 15));
         seq.Append(transform.DOMove(slidePosition, 1)
-                .OnComplete(() => { 
+                .OnComplete(() =>
+                {
                     Invoke("EndLevel", 1f);
-                    runParticle.GetComponent<ParticleSystem>().Stop(); }));
+                    runParticle.GetComponent<ParticleSystem>().Stop();
+                }));
     }
 
     private void PlayAnim(bool chill)
@@ -278,6 +301,25 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
             {
                 customers[i].GetComponent<ModelManager>().PlaySittingAnim();
             }
+        }
+    }
+
+    private void RotateZ()
+    {
+        if (Input.GetMouseButton(0) && canRotate)
+        {
+            float res = Screen.width / 2;
+            Vector2 pos = Input.mousePosition;
+            float mousePos = (pos.x - res) / 40f; //7.5 ile dene
+
+            Debug.Log(mousePos);
+            float z = Mathf.Clamp(mousePos, -clampLocalRotZ, clampLocalRotZ);
+            character.transform.rotation = Quaternion.Lerp(character.transform.rotation, Quaternion.Euler(0, 0, z), Time.deltaTime * sensivitiy);
+
+        }
+        if (!canRotate)
+        {
+            character.transform.rotation = Quaternion.Lerp(character.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * sensivitiy);
         }
     }
 

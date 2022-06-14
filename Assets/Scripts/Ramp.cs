@@ -12,6 +12,7 @@ public class Ramp : MonoBehaviour
     {
         TurnGreen();
         CalculateRange();
+        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
     }
 
     private void OnTriggerExit(Collider other)
@@ -32,7 +33,8 @@ public class Ramp : MonoBehaviour
     private void CalculateRange()
     {
         int range = (int)(transform.localPosition.z / blockSize);
-        int money = range * ((PlayerPrefs.GetInt("HCLevel") + 1) * 10);
-        PlayerPrefs.SetInt("TotalMoney", money);
+        int currentMoney = GameManager.Instance.ReturnCurrentMoney();
+        int money = range * currentMoney - currentMoney;
+        GameManager.Instance.AddMultipliedMoney(money);
     }
 }

@@ -8,12 +8,20 @@ public class LandingTriggers : MonoBehaviour
     [Header("Path Infos")]
     [SerializeField] private int number;
     [SerializeField] private float jumpHeight;
+    [SerializeField] private bool isBumpy = false;
+    [SerializeField] private Collider col;
+
+    private void Start()
+    {
+        col = GetComponent<Collider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerManagement.Instance.SwitchPath(-jumpHeight, number);
+            PlayerManagement.Instance.SwitchPath(-jumpHeight, number, isBumpy);
+            col.enabled = false;
         }
     }
 }

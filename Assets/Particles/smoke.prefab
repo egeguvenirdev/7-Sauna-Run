@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6247913329587986584}
   - component: {fileID: 6247913329584768862}
   m_Layer: 0
-  m_Name: Small Fade Effect
+  m_Name: smoke
   m_TagString: SFE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

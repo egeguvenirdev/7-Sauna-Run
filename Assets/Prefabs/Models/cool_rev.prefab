@@ -2269,7 +2269,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 8281012055526032964}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2509,6 +2509,12 @@ MonoBehaviour:
   _animancer: {fileID: 8316612064824436046}
   _fadeDuration: 0.1
   _clips:
+  - {fileID: 7400000, guid: 56e01ca93ceed764a8163c2e1861cd64, type: 2}
+  - {fileID: 7400000, guid: 4ce446e0f63bfac40a0cceb4fb1edd61, type: 2}
+  - {fileID: 7400000, guid: 7e45db7de9fa9a0408bda660411310fb, type: 2}
+  - {fileID: 7400000, guid: 629cce24e04c48e458c1bd68bc325548, type: 2}
+  - {fileID: 7400000, guid: 53a550cfb254045448f1a849bbf03816, type: 2}
+  - {fileID: 7400000, guid: e7da5d9c65a5ae24bab4369873f78744, type: 2}
   - {fileID: -203655887218126122, guid: e08f9f23a798fc54c9ac476eca0879aa, type: 3}
   _playDefault: 0
   _playSitting: 1
@@ -2543,9 +2549,9 @@ MonoBehaviour:
   clean: {fileID: 8281012055526032964}
   animancer: {fileID: 8316612064824436045}
   minSittingRange: 0
-  maxSittingRange: 2
-  minCheeringRange: 2
-  maxCheeringRange: 5
+  maxSittingRange: 1
+  minCheeringRange: 1
+  maxCheeringRange: 6
 --- !u!1 &8853860929678106469
 GameObject:
   m_ObjectHideFlags: 0

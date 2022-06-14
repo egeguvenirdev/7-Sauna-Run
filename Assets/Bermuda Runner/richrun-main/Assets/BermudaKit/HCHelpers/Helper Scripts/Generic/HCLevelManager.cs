@@ -38,8 +38,8 @@ namespace Ali.Helper
 
         private void Awake()
         {
-            //Init();
-            //GenerateCurrentLevel();
+            Init();
+            GenerateCurrentLevel();
             //PlayerPrefs.SetInt("HCLevel", 119);
         }
 

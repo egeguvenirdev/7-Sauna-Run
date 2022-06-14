@@ -17,6 +17,7 @@ public class Obstacle : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerManagement.Instance.ThrowCustomer();
+            Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
         }
     }
 }

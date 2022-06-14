@@ -24,7 +24,7 @@ public class RunnerScript : MonoBehaviour
 
 
     [Header("Run Settings")]
-    [SerializeField] private float runSpeed = 2;
+    public float runSpeed = 2;
     [SerializeField] private float localTargetswipeSpeed = 2f;
     [SerializeField] private float swipeLerpSpeed = 2f;
     [SerializeField] private float swipeRotateLerpSpeed = 2f;

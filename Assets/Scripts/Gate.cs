@@ -31,7 +31,7 @@ public class Gate : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CloseTriggers();
-
+            Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
             if (objectType == ObjectType.BuffGate)
             {
                 PlayerManagement.Instance.AddCap(capacity);
