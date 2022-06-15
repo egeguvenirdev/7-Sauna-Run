@@ -63,6 +63,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int ReturnCurrentMoney()
     {
+        Debug.Log(currentLvMoney);
         return currentLvMoney;
     }
 

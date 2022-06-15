@@ -183,8 +183,8 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
             jumpPoint += new Vector3(0, 0, -5);
         }
 
-        seq.Append(pickedObject.transform.DOJump(jumpPoint, 1, 1, 1)
-            .OnComplete(() => { pickedObject.transform.parent = null; }));
+        pickedObject.transform.parent = null;
+        pickedObject.transform.DOJump(jumpPoint, 1, 1, 1);
 
         customers.RemoveAt(customers.Count - 1);
         UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
@@ -271,7 +271,8 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         seq.Append(mainCam.DOLocalMove(new Vector3(0, 4.15f, -8.756f), 2));
 
         float pathRange = (customers.Count - 1) * 7.5f;
-        seq.Join(transform.DOJump(new Vector3(0, 0.125f, transform.position.z + (int)pathRange), 0 , 1, pathRange / 12.5f)
+        float pathDuration = customers.Count * .25f;
+        seq.Join(transform.DOJump(new Vector3(0, 0.125f, transform.position.z + (int)pathRange), 0 , 1, pathDuration)
             .OnComplete(() =>
             {
                 DragTheSauna();         
@@ -280,7 +281,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     }
     private void DragTheSauna()
     {
-        Vector3 slidePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(1, 5));
+        Vector3 slidePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, 5));
         seq.Append(transform.DOMove(slidePosition, 2)
                 .OnComplete(() =>
                 {

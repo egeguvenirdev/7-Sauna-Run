@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.7176471, g: 0.9294118, b: 1, a: 1}
+  m_FogColor: {r: 0.28627452, g: 0.79607844, b: 1, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 26.1
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 0e269d21846501c4dbb4e1520793d286, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 17380c24072c0954898ab03528ac9077, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.042706408, g: 0, b: 0.16886905, a: 1}
+  m_IndirectSpecularColor: {r: 0.30534914, g: 0.8404134, b: 0.99999946, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1800,21 +1800,21 @@ MonoBehaviour:
     rgba: 4288657617
   fogColors:
   - serializedVersion: 2
-    rgba: 4294563507
+    rgba: 4294629557
   - serializedVersion: 2
-    rgba: 4294622821
+    rgba: 4287914300
   - serializedVersion: 2
-    rgba: 4294563247
+    rgba: 4294953801
   - serializedVersion: 2
-    rgba: 4294933996
+    rgba: 4294953801
   - serializedVersion: 2
-    rgba: 4294962615
+    rgba: 4294953801
   skyboxes:
   - {fileID: 2100000, guid: b94a90c9516c9cc42bf2d46a3d63a76a, type: 2}
   - {fileID: 2100000, guid: 909e823d08377af409e7efd98e7e0a74, type: 2}
+  - {fileID: 2100000, guid: 17380c24072c0954898ab03528ac9077, type: 2}
   - {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
-  - {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
-  - {fileID: 2100000, guid: 0e269d21846501c4dbb4e1520793d286, type: 2}
+  - {fileID: 2100000, guid: 17380c24072c0954898ab03528ac9077, type: 2}
 --- !u!4 &1095156861935009938 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5265285997767335863, guid: 5a3b7255df3213942a440d277a780e71, type: 3}
@@ -4918,7 +4918,7 @@ MonoBehaviour:
   - {fileID: 1070890130563913437, guid: 46f906434820a7c42b1a05d0887b089a, type: 3}
   - {fileID: 1852428049365737444, guid: bd5b81d20a8095848a1105b8ff0db8cd, type: 3}
   _levelIndex: 4
-  _forceLevel: 0
+  _forceLevel: 1
 --- !u!4 &4593815546566416589
 Transform:
   m_ObjectHideFlags: 0

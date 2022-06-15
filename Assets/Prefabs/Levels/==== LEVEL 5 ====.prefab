@@ -70611,9 +70611,9 @@ MonoBehaviour:
       - 0
       - 0
       - 0
-      globalNormalsAngle: 179
+      globalNormalsAngle: 149
       flipNormals: 1
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0
     vertexPathMinVertexSpacing: 1
     showTransformTool: 1

@@ -22,7 +22,6 @@ public class Ramp : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         TurnGreen();
-        CalculateRange();
         PullCustomer();
         Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
     }
@@ -47,6 +46,7 @@ public class Ramp : MonoBehaviour
         int range = (int)(transform.localPosition.z / blockSize);
         int currentMoney = GameManager.Instance.ReturnCurrentMoney();
         int money = range * currentMoney - currentMoney;
+        Debug.Log(money);
         GameManager.Instance.AddMultipliedMoney(money);
     }
 
@@ -54,17 +54,18 @@ public class Ramp : MonoBehaviour
     {
         if (PlayerManagement.Instance.ReturnCustomerCount() <= 0) 
         {
+            CalculateRange();
             return; 
         }
         GameObject customer = PlayerManagement.Instance.ReturnCustomer();
         customer.transform.parent = null;
         customer.transform.rotation = tableTransform.rotation;
-        customer.transform.DOScale(customer.transform.localScale.x + 0.01f, 1f);
+        customer.transform.DOScale(customer.transform.localScale.x + 0.01f, 0.5f);
         modelManager = customer.GetComponent<ModelManager>();
         modelManager.PlayFlyingAnim();
 
         Vector3 targetPoint = tableTransform.position;
         if (modelManager.isMale) targetPoint += new Vector3(0, -0.048f, 0);
-        seqRamp.Append(customer.transform.DOMove(targetPoint, 1).OnComplete(() => { modelManager.PlayLyingAnim(); }));
+        seqRamp.Append(customer.transform.DOMove(targetPoint, 0.2f).OnComplete(() => { modelManager.PlayLyingAnim(); }));
     }
 }
