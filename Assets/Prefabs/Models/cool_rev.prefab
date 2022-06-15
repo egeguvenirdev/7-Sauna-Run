@@ -2516,6 +2516,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 53a550cfb254045448f1a849bbf03816, type: 2}
   - {fileID: 7400000, guid: e7da5d9c65a5ae24bab4369873f78744, type: 2}
   - {fileID: -203655887218126122, guid: e08f9f23a798fc54c9ac476eca0879aa, type: 3}
+  - {fileID: -203655887218126122, guid: 15a0dab61f1d9ce4fb6887273558a0f3, type: 3}
   _playDefault: 0
   _playSitting: 1
   idleRange: 5

@@ -1,17 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Ramp : MonoBehaviour
 {
     [SerializeField] private Material black;
     [SerializeField] private Material green;
     [SerializeField] private float blockSize;
+    [SerializeField] private Transform tableTransform;
+    private ModelManager modelManager;
+
+    Sequence seqRamp;
+
+    private void Start()
+    {
+        DOTween.Init();
+        seqRamp = DOTween.Sequence();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         TurnGreen();
         CalculateRange();
+        PullCustomer();
         Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
     }
 
@@ -36,5 +48,23 @@ public class Ramp : MonoBehaviour
         int currentMoney = GameManager.Instance.ReturnCurrentMoney();
         int money = range * currentMoney - currentMoney;
         GameManager.Instance.AddMultipliedMoney(money);
+    }
+
+    private void PullCustomer()
+    {
+        if (PlayerManagement.Instance.ReturnCustomerCount() <= 0) 
+        {
+            return; 
+        }
+        GameObject customer = PlayerManagement.Instance.ReturnCustomer();
+        customer.transform.parent = null;
+        customer.transform.rotation = tableTransform.rotation;
+        customer.transform.DOScale(customer.transform.localScale.x + 0.01f, 1f);
+        modelManager = customer.GetComponent<ModelManager>();
+        modelManager.PlayFlyingAnim();
+
+        Vector3 targetPoint = tableTransform.position;
+        if (modelManager.isMale) targetPoint += new Vector3(0, -0.048f, 0);
+        seqRamp.Append(customer.transform.DOMove(targetPoint, 1).OnComplete(() => { modelManager.PlayLyingAnim(); }));
     }
 }

@@ -14,19 +14,19 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.7176471, g: 0.9294118, b: 1, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: -83.1
-  m_LinearFogEnd: 45.26
+  m_LinearFogStart: 26.1
+  m_LinearFogEnd: 50
   m_AmbientSkyColor: {r: 0.63075733, g: 0.7156938, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.11443538, g: 0.12477186, b: 0.13286836, a: 1}
   m_AmbientGroundColor: {r: 0.046665095, g: 0.042311423, b: 0.035601325, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 909e823d08377af409e7efd98e7e0a74, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0e269d21846501c4dbb4e1520793d286, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1491,6 +1491,7 @@ MonoBehaviour:
   runnerScript: {fileID: 2071608842}
   character: {fileID: 1542597281}
   localMover: {fileID: 980155373}
+  mainCam: {fileID: 3219154873638075020}
   smallPool: {fileID: 322315174508206632}
   smallTransforms:
   - {fileID: 245122183}
@@ -1797,6 +1798,17 @@ MonoBehaviour:
     rgba: 4289311924
   - serializedVersion: 2
     rgba: 4288657617
+  fogColors:
+  - serializedVersion: 2
+    rgba: 4294563507
+  - serializedVersion: 2
+    rgba: 4294622821
+  - serializedVersion: 2
+    rgba: 4294563247
+  - serializedVersion: 2
+    rgba: 4294933996
+  - serializedVersion: 2
+    rgba: 4294962615
   skyboxes:
   - {fileID: 2100000, guid: b94a90c9516c9cc42bf2d46a3d63a76a, type: 2}
   - {fileID: 2100000, guid: 909e823d08377af409e7efd98e7e0a74, type: 2}
@@ -2700,7 +2712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.13, y: -204.23}
+  m_AnchoredPosition: {x: 11.13, y: -322.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3535932342095862863
@@ -3431,7 +3443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -123.5}
+  m_AnchoredPosition: {x: 0, y: -242.17}
   m_SizeDelta: {x: 460, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3535932343246045242
@@ -4351,7 +4363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -28.680054}
+  m_AnchoredPosition: {x: 0, y: -67.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3548358718536418699
@@ -6072,7 +6084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 22.82, y: -23.49}
+  m_AnchoredPosition: {x: 22.819946, y: -23.48999}
   m_SizeDelta: {x: 44.325035, y: 20.960125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7587531014006299248
@@ -6746,7 +6758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: 182}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7587531014623501955

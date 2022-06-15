@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
     private bool oneTimeCheck = true;
 
     [SerializeField] private Color32[] colorTypes = { };
+    [SerializeField] private Color32[] fogColors = { };
     [SerializeField] private Material[] skyboxes = { };
 
     void Start()
@@ -120,7 +121,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void SetGroundColor()
     {
+        int skyBox = Random.Range(0, 5);
+
         mat.SetColor("_HColor", colorTypes[Random.Range(0,5)]);
-        RenderSettings.skybox = skyboxes[Random.Range(0, 5)];
+        RenderSettings.fogColor = fogColors[skyBox];
+        RenderSettings.skybox = skyboxes[skyBox];
     }
 }

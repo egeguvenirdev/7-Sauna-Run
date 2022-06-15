@@ -12,6 +12,7 @@ public class ModelManager : MonoBehaviour
     [SerializeField] private int minCheeringRange = 0;
     [SerializeField] private int maxCheeringRange = 5;
     private Collider col;
+    public bool isMale;
 
     private void Start()
     {
@@ -57,6 +58,11 @@ public class ModelManager : MonoBehaviour
     public void PlayFlyingAnim()
     {
         animancer.PlayAnimation("Fly");
+    }
+
+    public void PlayLyingAnim()
+    {
+        animancer.PlayAnimation("Lying");
     }
 
     private void CloseCollider()

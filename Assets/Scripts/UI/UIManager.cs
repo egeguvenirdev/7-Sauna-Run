@@ -147,7 +147,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void SetTotalMoney(string money)
     {
-        totalMoneyText.text = money;
+        totalMoneyText.text = "$" + money;
     }
 
     public void UIQuitGame()
