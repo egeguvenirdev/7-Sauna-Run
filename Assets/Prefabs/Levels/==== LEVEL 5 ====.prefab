@@ -70613,7 +70613,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 149
       flipNormals: 1
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0
     vertexPathMinVertexSpacing: 1
     showTransformTool: 1
@@ -80807,10 +80807,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1852428049752963886}
     m_Modifications:
+    - target: {fileID: 1272889222859247117, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d0622fbdb763a24b8349bad0ab44cf2, type: 2}
     - target: {fileID: 2670165181103697995, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
       propertyPath: capacity
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3069847009718743595, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d0622fbdb763a24b8349bad0ab44cf2, type: 2}
+    - target: {fileID: 5589385794387282011, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d0622fbdb763a24b8349bad0ab44cf2, type: 2}
+    - target: {fileID: 5690168678328343772, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d0622fbdb763a24b8349bad0ab44cf2, type: 2}
     - target: {fileID: 5869490070003642691, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -80871,10 +80887,18 @@ PrefabInstance:
       propertyPath: capacity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7436341832367974467, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d0622fbdb763a24b8349bad0ab44cf2, type: 2}
     - target: {fileID: 7535880376425277256, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
       propertyPath: m_Name
       value: Left Buff Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 7635962422468275412, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d0622fbdb763a24b8349bad0ab44cf2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a2e53a464c4ab4fbe8462e7ee7163b, type: 3}
 --- !u!4 &60242799347451327 stripped
