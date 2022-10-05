@@ -15,6 +15,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject tapToPlayUI;
     [SerializeField] private GameObject nextLvMenuUI;
     [SerializeField] private GameObject restartLvUI;
+    [SerializeField] private GameObject nonAddButton;
     [Space]
 
     //pause button ui uthilities
@@ -69,6 +70,21 @@ public class UIManager : MonoSingleton<UIManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //SAHNEYI YUKLE BASTAN
     }
 
+    public void NextLevelButtonReward()
+    {
+        nextLvMenuUI.SetActive(false);
+        isPaused = false;
+        PlayerPrefs.SetInt("Cap", PlayerPrefs.GetInt("Cap", 0) + 1);
+        HCLevelManager.Instance.LevelUp();
+        LevelText();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //SAHNEYI YUKLE BASTAN
+    }
+
+    public void OpenNonAddButton()
+    {
+        nonAddButton.SetActive(true);
+    }
+
     public void RestartLevelButton()
     {
         restartLvUI.SetActive(false);
@@ -83,6 +99,8 @@ public class UIManager : MonoSingleton<UIManager>
             tapToPlayUI.SetActive(false);
             nextLvMenuUI.SetActive(true);
             isPaused = true;
+            currentLV.enabled = false;
+            Invoke("OpenNonAddButton", 2f);
         }
     }
 

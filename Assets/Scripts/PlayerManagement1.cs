@@ -211,7 +211,6 @@ public class PlayerManagement1 : MonoSingleton<PlayerManagement1>
 
     public void Shake()
     {
-        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
     }
 
     public int ReturnMouseIndex()

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Ali.Helper
 {
-    public class HCLevelManager : GenericSingleton<HCLevelManager>
+    public class HCLevelManager : MonoSingleton<HCLevelManager>
     {
         [SerializeField] private GameObject[] _levelPrefabs;
         [SerializeField] private int _levelIndex = 0;
@@ -39,8 +39,15 @@ namespace Ali.Helper
         private void Awake()
         {
             Init();
+            Debug.Log(WebAdManager.Instance);
+            
             GenerateCurrentLevel();
             //PlayerPrefs.SetInt("HCLevel", 119);
+        }
+
+        private void Start()
+        {
+            WebAdManager.Instance.ShowAd();
         }
 
         public void GenerateCurrentLevel()

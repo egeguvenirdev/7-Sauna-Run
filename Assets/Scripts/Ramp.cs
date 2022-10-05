@@ -23,7 +23,6 @@ public class Ramp : MonoBehaviour
     {
         TurnGreen();
         PullCustomer();
-        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
     }
 
     private void OnTriggerExit(Collider other)

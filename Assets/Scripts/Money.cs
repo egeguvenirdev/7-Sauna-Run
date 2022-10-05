@@ -13,7 +13,6 @@ public class Money : MonoBehaviour
         particle.SetActive(true);
         particle.GetComponent<ParticleSystem>().Play();
 
-        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
         GameManager.Instance.SetTotalMoney(moneyWorth);
         gameObject.SetActive(false);
     }

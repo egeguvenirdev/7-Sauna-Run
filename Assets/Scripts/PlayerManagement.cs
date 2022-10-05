@@ -8,6 +8,10 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     [Header("Scripts")]
     [SerializeField] private RunnerScript runnerScript;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource camSound;
+    [SerializeField] private AudioClip explosionAudio;
+
     [Header("Saunas' transforms")]
     [SerializeField] private GameObject character;
     [SerializeField] private GameObject localMover;
@@ -47,7 +51,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     {
         DOTween.Init();
         runnerScript.Init();
-        activeMaxCap = startCap;
+        activeMaxCap = startCap + PlayerPrefs.GetInt("Cap", 0);
         customers.Add(mainCharacter);
         UIManager.Instance.SetProgress(activeMaxCap, customers.Count);
     }
@@ -83,12 +87,12 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         }
 
         customers.Add(addedCharacter);
-        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.LightImpact);
         UIManager.Instance.SetProgress((float)activeMaxCap, (float)customers.Count);
     }
 
     public void AddCap(int addedCap)
     {
+        camSound.PlayOneShot(explosionAudio);
         if ((activeMaxCap + addedCap) <= smallCap) //small sauna's calculations
         {
             if ((activeMaxCap + addedCap) <= 0)
@@ -202,7 +206,6 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     private void FadeEffect()
     {
         seq = DOTween.Sequence();
-        Haptic.Instance.HapticFeedback(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
         Vector3 rotateVector = new Vector3(0, 360, 0);
         seq.Append(character.transform.DORotate(rotateVector, 0.1f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear).SetLoops(7, LoopType.Restart));
