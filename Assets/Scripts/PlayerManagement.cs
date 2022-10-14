@@ -59,6 +59,16 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     void Update()
     {
         RotateZ();
+
+        if (Input.GetMouseButton(0))
+        {
+            StartMovement();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            StopMovement();
+        }
     }
 
     public void AddCustomer(GameObject addedCharacter)
