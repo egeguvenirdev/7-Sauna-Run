@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BermudaHut/Scenes/BermudaSplash.unity
+    path: Assets/Scenes/BermudaSplash.unity
     guid: 865a3bb28f4177742aea5cf8b616f875
   - enabled: 1
     path: Assets/Scenes/Main.unity

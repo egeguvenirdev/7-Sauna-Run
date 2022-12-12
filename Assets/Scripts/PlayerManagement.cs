@@ -41,6 +41,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
 
     private int activeMaxCap;
     public bool canRotate = false;
+    public bool canClick = true;
     private Vector3 mousePrevPosition = Vector3.zero;
     private float mouseDeltaPos = 0;
 
@@ -49,6 +50,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
 
     void Start()
     {
+        canClick = true;
         DOTween.Init();
         runnerScript.Init();
         activeMaxCap = startCap + PlayerPrefs.GetInt("Cap", 0);
@@ -59,15 +61,17 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
     void Update()
     {
         RotateZ();
-
-        if (Input.GetMouseButton(0))
+        if (canClick)
         {
-            StartMovement();
-        }
+            if (Input.GetMouseButton(0))
+            {
+                StartMovement();
+            }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopMovement();
+            if (Input.GetMouseButtonUp(0))
+            {
+                StopMovement();
+            }
         }
     }
 
@@ -108,7 +112,10 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
             if ((activeMaxCap + addedCap) <= 0)
             {
                 StopMovement();
-                UIManager.Instance.RestartButtonUI();
+                if (canClick)
+                {
+                    UIManager.Instance.RestartButtonUI();
+                }
                 ThrowCustomer();
                 return;
             }
@@ -193,7 +200,11 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
         if (customers.Count == 1)
         {
             StopMovement();
-            UIManager.Instance.RestartButtonUI();
+            if (canClick )
+            {
+                UIManager.Instance.RestartButtonUI();
+            }
+            
             jumpPoint += new Vector3(0, 0, -5);
         }
 
@@ -276,6 +287,7 @@ public class PlayerManagement : MonoSingleton<PlayerManagement>
 
     public void FinishAction()
     {
+        canClick = false;
         StopMovement();
         PlayAnim(true);
         runParticle.SetActive(true);

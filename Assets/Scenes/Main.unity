@@ -1477,8 +1477,8 @@ MonoBehaviour:
   startDistance: 0
   clampLocalX: 2
   runSpeed: 5
-  localTargetswipeSpeed: 2
-  swipeLerpSpeed: 10
+  localTargetswipeSpeed: 1
+  swipeLerpSpeed: 5
   swipeRotateLerpSpeed: 5
 --- !u!114 &2071608843
 MonoBehaviour:
@@ -1558,6 +1558,7 @@ MonoBehaviour:
   customers: []
   mainCharacter: {fileID: 8316612064824436044}
   canRotate: 0
+  canClick: 1
 --- !u!114 &2071608844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4553,7 +4554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3548358718842414814
 MonoBehaviour:
   m_ObjectHideFlags: 0
